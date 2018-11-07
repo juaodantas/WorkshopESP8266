@@ -15,7 +15,7 @@ DHT dht;
 
 //Conexão com a rede Wi-Fi
 #define WIFI_SSID "WORKSHOP ESP8266"
-#define WIFI_PASSWORD "LoveEsp8266"
+#define WIFI_PASSWORD "WORKSHOPESP8266"
 
 #define LED 14
 

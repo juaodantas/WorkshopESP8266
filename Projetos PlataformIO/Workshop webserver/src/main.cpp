@@ -7,7 +7,7 @@
 DHT dht;
 /* Set these to your desired credentials. */
 const char *ssid = "WORKSHOP ESP8266";
-const char *password = "LoveEsp8266";
+const char *password = "WORKSHOPESP8266";
 
 float humidity;
 float temperature;
@@ -36,7 +36,8 @@ void handleRoot() {
   esp += "<html>";
   esp += "  <head>";
   esp += "    <meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\">";
-  esp += "    <title>Access Point ESP8266</title>";
+  esp += "    <meta charset=\"UTF-8\">";
+  esp += "    <title>Web Server ESP8266</title>";
   esp += "  </head>";
   esp += "  <body>";
   esp += "    <h1>Você está conectado!</h1>";

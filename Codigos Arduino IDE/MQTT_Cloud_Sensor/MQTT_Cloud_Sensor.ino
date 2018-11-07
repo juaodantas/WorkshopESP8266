@@ -1,4 +1,3 @@
-#include <Arduino.h>
 
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
@@ -9,24 +8,24 @@
 
 DHT dht;
 
-#define wifi_ssid "WORKSHOP ESP8266"
-#define wifi_password "WORKSHOPESP8266"
+#define wifi_ssid "gdgcuiaba"
+#define wifi_password "gdgcuiaba"
 
 #define mqtt_server "iot.eclipse.org"
 #define mqtt_user ""
 #define mqtt_password ""
 
-#define humidity_topic "esp8266/sensor/humidity"              // mudar aqui  
-#define temperature_topic "esp8266/sensor/temperature"        // mudar aqui  
-#define led1_topic "esp8266/led1"                            // mudar aqui  
-#define luminosidade_topic "esp8266/sensor/luminosidade"     // mudar aqui  
+#define humidity_topic "alvaro/sensor/humidity"              // mudar aqui  
+#define temperature_topic "alvaro/sensor/temperature"        // mudar aqui  
+#define led1_topic "alvaro/led1"                            // mudar aqui  
+#define luminosidade_topic "alvaro/sensor/luminosidade"     // mudar aqui  
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 void setup_wifi();
 ESP8266WebServer server(80);
 
-/* Just a little test message.  Go to http://192.168.4.1 in a web browser 
+/* Just a little test message.  Go to http://192.168.4.1 in a web browser
    connected to this access point to see it.
 */
 
@@ -41,19 +40,15 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length) {
 
   if(String(topic) == led1_topic)
   {
-    if(String(message) == "Liga"){
+    if(String(message) == "Liga")
       digitalWrite(D5, HIGH);
-      Serial.println("Ligado");
-    }
-    else if(String(message) == "Desliga"){
+    else
       digitalWrite(D5, LOW);
-      Serial.println("Desligado");
-    }
   }
 }
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   dht.setup(4); // data pin D2
   setup_wifi();
   client.setServer(mqtt_server, 1883);
@@ -87,8 +82,8 @@ void reconnect() {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
     // If you do not want to use a username and password, change next line to
-     //if (client.connect("ESP8266Client")) {
-    if (client.connect("esp8266")) {                // mudar aqui  
+    // if (client.connect("ESP8266Client")) {
+    if (client.connect("alvaroviebrantz")) {                // mudar aqui  
       Serial.println("connected");
       client.subscribe(led1_topic);
     } else {
@@ -116,6 +111,7 @@ void loop() {
     reconnect();
   }
   client.loop();
+
   long now = millis();
   if (now - lastMsg > 2000) {
     lastMsg = now;
@@ -141,4 +137,3 @@ void loop() {
     client.publish(luminosidade_topic, String(luminosidade).c_str(), true);
   }
 }
-

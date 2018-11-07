@@ -7,8 +7,8 @@
 
 DHT dht;
 /* Set these to your desired credentials. */
-const char *ssid = "ESPap";
-const char *password = "thereisnospoon";
+const char *ssid = "Rede do ESP";
+const char *password = "12345678";
 
 float humidity;
 float temperature;
@@ -37,6 +37,7 @@ void handleRoot() {
   esp += "<html>";
   esp += "  <head>";
   esp += "    <meta name=\"viewport\" content=\"initial-scale=1.0, user-scalable=no\">";
+  esp += "    <meta charset=\"UTF-8\">";
   esp += "    <title>Access Point ESP8266</title>";
   esp += "  </head>";
   esp += "  <body>";
