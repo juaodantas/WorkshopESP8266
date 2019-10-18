@@ -5,8 +5,8 @@
 
 DHT dht;
 /* Set these to your desired credentials. */
-const char *ssid = "Gabriel";
-const char *password = "99494728";
+const char *ssid = "Lab 95";
+const char *password = "laboratorio95";
 
 float humidity;
 float temperature;
@@ -89,7 +89,7 @@ void handleRoot() {
 
 void setup() {
   delay(1000);
-  Serial.begin(115200);
+  Serial.begin(9600);
   Serial.println();
   Serial.print("Configuring access point...");
   /* You can remove the password parameter if you want the AP to be open. */

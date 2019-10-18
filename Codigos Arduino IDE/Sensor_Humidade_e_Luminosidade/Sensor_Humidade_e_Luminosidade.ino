@@ -11,10 +11,10 @@ void setup()
   Serial.println();
   Serial.println("Status\tHumidity (%)\tTemperature (C)\t(F) \tLuminosidade (%)");
 
-  pinMode(D5, OUTPUT);
-  pinMode(D6, OUTPUT);
+  pinMode(D4, OUTPUT);
+  pinMode(D2, OUTPUT);
 
-  dht.setup(4); // data pin 2
+  dht.setup(14); // gpio 14(D5), data from DHT
 }
 
 void loop()
@@ -22,29 +22,29 @@ void loop()
   if(Serial.available() > 0)
   {
     int val = Serial.parseInt();
-    if(val == 1)
+    if(val == 1)  // liga OU desliga o led 1
     {
       if (estado_LED1)
       {
-        digitalWrite(D5, LOW);
+        digitalWrite(D4, LOW);
         estado_LED1 = 0;    
       }
       else
       {
-        digitalWrite(D5, HIGH);
+        digitalWrite(D4, HIGH);
         estado_LED1 = 1;
       }
     }
-    else if(val == 2)
+    else if(val == 2) // liga OU desliga o led 2
     {
       if (estado_LED2)
       {
-        digitalWrite(D6, LOW);
+        digitalWrite(D2, LOW);
         estado_LED2 = 0;    
       }
       else
       {
-        digitalWrite(D6, HIGH);
+        digitalWrite(D2, HIGH);
         estado_LED2 = 1;
       }
     }
@@ -52,10 +52,12 @@ void loop()
       Serial.println("Entrada Inválida");
   }
 
+  delay(dht.getMinimumSamplingPeriod());
+
   float humidity = dht.getHumidity();
   float temperature = dht.getTemperature();
-  int sensorValue = analogRead(A0);   // read the input on analog pin 0
-  int luminosidade = map(sensorValue, 0, 1023, 100, 0);
+ //int sensorValue = analogRead(A0);   // read the input on analog pin 0
+ // int luminosidade = map(sensorValue, 0, 1023, 100, 0);
 
   Serial.print(dht.getStatusString());
   Serial.print("\t");
@@ -64,8 +66,7 @@ void loop()
   Serial.print(temperature, 1);
   Serial.print("\t\t");
   Serial.print(dht.toFahrenheit(temperature), 1);
-  Serial.print("\t\t");
-  Serial.println(luminosidade);   // print out the value you read
+  Serial.println("\t\t");
+  //Serial.println(luminosidade);   // print out the value you read
 
-  delay(2000);
 }
